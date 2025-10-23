@@ -68,5 +68,5 @@ jobs:
             dist/build-windows-latest/*
             dist/build-macos-latest/*
             dist/build-ubuntu-latest/*
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
