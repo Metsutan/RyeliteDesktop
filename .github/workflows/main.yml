@@ -8,7 +8,7 @@ on:
       - staging
 
 jobs:
-  release:
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -37,3 +37,36 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run release
+
+      # This finds the built files (like .exe, .dmg) and saves them
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.os }} # Creates artifacts like 'build-windows-latest'
+          path: |
+            dist/*.exe
+            dist/*.dmg
+            dist/*.AppImage
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging'
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}-${{ github.sha }}
+          release_name: Release ${{ github.ref_name }} (${{ github.sha }})
+          draft: false
+          prerelease: ${{ github.ref_name == 'staging' }}
+          files: |
+            dist/build-windows-latest/*
+            dist/build-macos-latest/*
+            dist/build-ubuntu-latest/*
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
