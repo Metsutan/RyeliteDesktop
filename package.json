@@ -41,7 +41,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "ash-of-the-meadow",
+        "owner": "Metsutan",
         "repo": "RyeliteDesktop"
       }
     ],
