@@ -3,6 +3,8 @@ name: Build/release
 on:
   workflow_dispatch:
   push:
+    tags:
+      - 'v*.*.*'
     branches:
       - main
       - staging
@@ -60,10 +62,10 @@ jobs:
       - name: Create Release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ github.ref_name }}-${{ github.sha }}
-          release_name: Release ${{ github.ref_name }} (${{ github.sha }})
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
           draft: false
-          prerelease: ${{ github.ref_name == 'staging' }}
+          prerelease: ${{ github.ref_name == 'staging' && (contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta')) }}
           files: |
             dist/build-windows-latest/*
             dist/build-macos-latest/*
