@@ -3,16 +3,16 @@
   "productName": "RyeLite",
   "version": "0.1.0",
   "description": "A RuneLite-esque Client for the game High Spell",
-  "homepage": "https://github.com/ash-of-the-meadow/rl-core#readme",
+  "homepage": "https://github.com/Metsutan/RyeliteCore#readme",
   "engines": {
     "node": "^22.x.x"
   },
   "bugs": {
-    "url": "https://github.com/ash-of-the-meadow/rl-core/issues"
+    "url": "https://github.com/Metsutan/RyeliteCore/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ash-of-the-meadow/RyeliteDesktop/.git"
+    "url": "git+https://github.com/Metsutan/RyeliteDesktop/.git"
   },
   "license": "GPL-3.0-only",
   "author": "Ryelite Team",
@@ -41,7 +41,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "ash-of-the-meadow",
+        "owner": "Metsutan",
         "repo": "RyeliteDesktop"
       }
     ],
